@@ -16,8 +16,8 @@ public class FornecedorResource {
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Fornecedor> listar() {
 		
-		Fornecedor for1 = new Fornecedor(1, "Teste 1");
-		Fornecedor for2 = new Fornecedor(2, "Teste 2");
+		Fornecedor for1 = new Fornecedor(1, "30729998000120", "Teste 1");
+		Fornecedor for2 = new Fornecedor(2, "30729998000120", "Teste 2");
 		
 		List<Fornecedor> lista = new ArrayList<>();
 		lista.add(for1);
