@@ -1,0 +1,15 @@
+package com.api.compraspublicas.resources;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value="/fornecedores")
+public class FornecedorResource {
+
+	@RequestMapping(method=RequestMethod.GET)
+	public String listar() {
+		return "Rest está funcionando";
+	}
+}
