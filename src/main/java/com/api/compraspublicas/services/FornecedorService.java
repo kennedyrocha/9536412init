@@ -18,4 +18,10 @@ public class FornecedorService {
 		
 		return repo.findAll();
 	}
+	
+	public Fornecedor save(Fornecedor obj) {
+		
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }

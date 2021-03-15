@@ -1,10 +1,28 @@
 package com.api.compraspublicas.domain;
 
-public class Requisicao {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Requisicao implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Integer quantidadeTotal;
 	private Integer pagina;
+	
+	@OneToMany(mappedBy="requisicao", cascade=CascadeType.ALL)
+	private List<Licitacao> licitacoes = new ArrayList<>();
 	
 	public Requisicao() {		
 	}
@@ -38,6 +56,14 @@ public class Requisicao {
 
 	public void setPagina(Integer pagina) {
 		this.pagina = pagina;
+	}
+
+	public List<Licitacao> getLicitacoes() {
+		return licitacoes;
+	}
+
+	public void setLicitacoes(List<Licitacao> licitacoes) {
+		this.licitacoes = licitacoes;
 	}
 
 	@Override
