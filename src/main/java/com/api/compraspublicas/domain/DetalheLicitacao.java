@@ -1,11 +1,15 @@
 package com.api.compraspublicas.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -67,8 +71,8 @@ public class DetalheLicitacao implements Serializable {
 	@JsonProperty("CD_TIPO_FASE_ATUAL")
 	private String CD_TIPO_FASE_ATUAL;
 	
-	public DetalheLicitacao () {
-	}
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<Lote> lotes = new ArrayList<>();
 
 	public DetalheLicitacao(Integer id, Integer idLicitacao, String nR_PROCESSO, String nR_LICITACAO, String dS_OBJETO,
 			String aNO_LICITACAO, String dataInicioPropostas, String horaInicioPropostas, String dataFinalPropostas,
@@ -358,6 +362,17 @@ public class DetalheLicitacao implements Serializable {
 
 	public void setCD_TIPO_FASE_ATUAL(String cD_TIPO_FASE_ATUAL) {
 		CD_TIPO_FASE_ATUAL = cD_TIPO_FASE_ATUAL;
+	}
+	
+	public List<Lote> getLotes() {
+		return lotes;
+	}
+
+	public void setLotes(List<Lote> lotes) {
+		this.lotes = lotes;
+	}
+
+	public DetalheLicitacao () {
 	}
 
 	@Override

@@ -1,14 +1,20 @@
 package com.api.compraspublicas.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.api.compraspublicas.domain.DetalheLicitacao;
+import com.api.compraspublicas.domain.Lote;
 import com.api.compraspublicas.repositories.DetalheLicitacaoRepository;
 
+@Service
 public class DetalheLicitacaService {
 
 	@Autowired
 	private DetalheLicitacaoRepository repo;
+	
+	@Autowired
+	private LoteService loteService;
 	
 	public DetalheLicitacao save(DetalheLicitacao obj) {
 		
@@ -18,7 +24,12 @@ public class DetalheLicitacaService {
 			return detalhe;
 		}
 		else {
-			return repo.save(obj);
+			for (Lote lote : obj.getLotes()) {
+				lote.setDetalheLicitacao(obj);
+			}
+			repo.save(obj);
+			loteService.saveAll(obj.getLotes());
+			return obj;
 		}
 	}
 }
