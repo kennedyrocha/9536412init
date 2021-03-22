@@ -76,6 +76,18 @@ public class DetalheLicitacao implements Serializable {
 	@JsonProperty("MensagensPregoeiro")
 	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
 	private List<MensagemPregoeiro> mensagensPregoeiro = new ArrayList<>();
+	
+	@JsonProperty("MensagensChat")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<MensagemChat> mensagensChat = new ArrayList<>();
+	
+	@JsonProperty("Impugnacoes")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<Impugnacao> impugnacoes = new ArrayList<>();
+	
+	@JsonProperty("Suspensoes")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<Suspensao> suspensoes = new ArrayList<>();
 
 	public DetalheLicitacao () {
 	}
@@ -384,6 +396,30 @@ public class DetalheLicitacao implements Serializable {
 
 	public void setMensagensPregoeiro(List<MensagemPregoeiro> mensagensPregoeiro) {
 		this.mensagensPregoeiro = mensagensPregoeiro;
+	}
+
+	public List<MensagemChat> getMensagensChat() {
+		return mensagensChat;
+	}
+
+	public void setMensagensChat(List<MensagemChat> mensagensChat) {
+		this.mensagensChat = mensagensChat;
+	}
+
+	public List<Impugnacao> getImpugnacoes() {
+		return impugnacoes;
+	}
+
+	public void setImpugnacoes(List<Impugnacao> impugnacoes) {
+		this.impugnacoes = impugnacoes;
+	}
+
+	public List<Suspensao> getSuspensoes() {
+		return suspensoes;
+	}
+
+	public void setSuspensoes(List<Suspensao> suspensoes) {
+		this.suspensoes = suspensoes;
 	}
 
 	@Override
