@@ -39,6 +39,14 @@ public class Lote implements Serializable {
 	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL)
 	private List<Item> itens = new ArrayList<>();
 	
+	@JsonProperty("Inabilitados")
+	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL)
+	private List<Inabilitado> inabilitados = new ArrayList<>();
+	
+	@JsonProperty("Vencedores")
+	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL)
+	private List<Vencedor> vencedores = new ArrayList<>();
+	
 	public Lote() {
 	}
 
@@ -97,6 +105,22 @@ public class Lote implements Serializable {
 
 	public void setItens(List<Item> itens) {
 		this.itens = itens;
+	}
+
+	public List<Inabilitado> getInabilitados() {
+		return inabilitados;
+	}
+
+	public void setInabilitados(List<Inabilitado> inabilitados) {
+		this.inabilitados = inabilitados;
+	}
+
+	public List<Vencedor> getVencedores() {
+		return vencedores;
+	}
+
+	public void setVencedores(List<Vencedor> vencedores) {
+		this.vencedores = vencedores;
 	}
 
 	@Override

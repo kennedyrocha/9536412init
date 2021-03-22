@@ -46,4 +46,8 @@ public class ItemService {
 			lanceService.saveAll(it.getLances());
 		}
 	}
+	
+	public Item findByIdItem(Integer idItem) {
+		return repo.findByIdItem(idItem);
+	}
 }

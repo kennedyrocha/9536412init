@@ -19,9 +19,6 @@ public class DetalheLicitacaoRest {
 	@Autowired
 	private ErroService erroService;
 	
-	@Autowired
-	private JsonValidation validacao;
-	
 	private final RestTemplate restTemplate;
 	
 	public DetalheLicitacaoRest(RestTemplateBuilder restTemplateBuilder) {
