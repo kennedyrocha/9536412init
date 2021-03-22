@@ -104,6 +104,14 @@ public class DetalheLicitacao implements Serializable {
 	@JsonProperty("Reinicio")
 	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
 	private List<Reinicio> reinicios = new ArrayList<>();
+	
+	@JsonProperty("Revogacao")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<Revogacao> revogacoes = new ArrayList<>();
+	
+	@JsonProperty("Encerramento")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<Encerramento> encerramentos = new ArrayList<>();
 
 	public DetalheLicitacao () {
 	}
@@ -468,6 +476,22 @@ public class DetalheLicitacao implements Serializable {
 
 	public void setReinicios(List<Reinicio> reinicios) {
 		this.reinicios = reinicios;
+	}
+
+	public List<Revogacao> getRevogacoes() {
+		return revogacoes;
+	}
+
+	public void setRevogacoes(List<Revogacao> revogacoes) {
+		this.revogacoes = revogacoes;
+	}
+
+	public List<Encerramento> getEncerramentos() {
+		return encerramentos;
+	}
+
+	public void setEncerramentos(List<Encerramento> encerramentos) {
+		this.encerramentos = encerramentos;
 	}
 
 	@Override

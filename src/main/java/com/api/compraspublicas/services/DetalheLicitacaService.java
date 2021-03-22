@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.compraspublicas.domain.Cancelamento;
 import com.api.compraspublicas.domain.DetalheLicitacao;
+import com.api.compraspublicas.domain.Encerramento;
 import com.api.compraspublicas.domain.Impugnacao;
 import com.api.compraspublicas.domain.Lote;
 import com.api.compraspublicas.domain.MensagemChat;
@@ -12,6 +13,7 @@ import com.api.compraspublicas.domain.MensagemPregoeiro;
 import com.api.compraspublicas.domain.Publicacao;
 import com.api.compraspublicas.domain.Reinicio;
 import com.api.compraspublicas.domain.Republicacao;
+import com.api.compraspublicas.domain.Revogacao;
 import com.api.compraspublicas.domain.Suspensao;
 import com.api.compraspublicas.repositories.DetalheLicitacaoRepository;
 
@@ -48,6 +50,12 @@ public class DetalheLicitacaService {
 	@Autowired
 	private ReinicioService reinicioService;
 	
+	@Autowired
+	private RevogacaoService revogacaoService;
+	
+	@Autowired
+	private EncerramentoService encerramentoService;
+	
 	public DetalheLicitacao save(DetalheLicitacao obj) {
 		
 		DetalheLicitacao detalhe = repo.findByIdLicitacao(obj.getIdLicitacao());
@@ -83,6 +91,12 @@ public class DetalheLicitacaService {
 			for (Reinicio publ : obj.getReinicios()) {
 				publ.setDetalheLicitacao(obj);
 			}
+			for (Revogacao publ : obj.getRevogacoes()) {
+				publ.setDetalheLicitacao(obj);
+			}
+			for (Encerramento publ : obj.getEncerramentos()) {
+				publ.setDetalheLicitacao(obj);
+			}
 			
 			repo.save(obj);
 			
@@ -95,6 +109,8 @@ public class DetalheLicitacaService {
 			publicacaoService.saveAll(obj.getPublicacoes());
 			republicacaoService.saveAll(obj.getRepublicacoes());
 			reinicioService.saveAll(obj.getReinicios());
+			revogacaoService.saveAll(obj.getRevogacoes());
+			encerramentoService.saveAll(obj.getEncerramentos());
 			
 			return obj;
 		}
