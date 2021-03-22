@@ -3,6 +3,7 @@ package com.api.compraspublicas.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.compraspublicas.domain.Cancelamento;
 import com.api.compraspublicas.domain.DetalheLicitacao;
 import com.api.compraspublicas.domain.Impugnacao;
 import com.api.compraspublicas.domain.Lote;
@@ -32,6 +33,9 @@ public class DetalheLicitacaService {
 	@Autowired
 	private SuspensaoService suspensaoService;
 	
+	@Autowired
+	private CancelamentoService cancelamentoService;
+	
 	public DetalheLicitacao save(DetalheLicitacao obj) {
 		
 		DetalheLicitacao detalhe = repo.findByIdLicitacao(obj.getIdLicitacao());
@@ -55,6 +59,9 @@ public class DetalheLicitacaService {
 			for (Suspensao susp : obj.getSuspensoes()) {
 				susp.setDetalheLicitacao(obj);
 			}
+			for (Cancelamento canc : obj.getCancelamentos()) {
+				canc.setDetalheLicitacao(obj);
+			}
 			
 			repo.save(obj);
 			
@@ -63,6 +70,7 @@ public class DetalheLicitacaService {
 			mensagemChatService.saveAll(obj.getMensagensChat());
 			impugnacaoService.saveAll(obj.getImpugnacoes());
 			suspensaoService.saveAll(obj.getSuspensoes());
+			cancelamentoService.saveAll(obj.getCancelamentos());
 			
 			return obj;
 		}
