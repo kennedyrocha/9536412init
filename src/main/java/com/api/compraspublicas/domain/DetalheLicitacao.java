@@ -96,6 +96,10 @@ public class DetalheLicitacao implements Serializable {
 	@JsonProperty("Publicacao")
 	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
 	private List<Publicacao> publicacoes = new ArrayList<>();;
+	
+	@JsonProperty("Republicacao")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<Republicacao> republicacoes = new ArrayList<>();;
 
 	public DetalheLicitacao () {
 	}
@@ -444,6 +448,14 @@ public class DetalheLicitacao implements Serializable {
 
 	public void setPublicacoes(List<Publicacao> publicacoes) {
 		this.publicacoes = publicacoes;
+	}
+
+	public List<Republicacao> getRepublicacoes() {
+		return republicacoes;
+	}
+
+	public void setRepublicacoes(List<Republicacao> republicacoes) {
+		this.republicacoes = republicacoes;
 	}
 
 	@Override

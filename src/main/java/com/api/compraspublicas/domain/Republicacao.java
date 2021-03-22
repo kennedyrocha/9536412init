@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-public class Publicacao implements Serializable{
+public class Republicacao implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -39,7 +39,7 @@ public class Publicacao implements Serializable{
 	private String evento;
 	
 	@ElementCollection
-	@CollectionTable(name="CD_ARQUIVO_PUBLICACAO")
+	@CollectionTable(name="CD_ARQUIVO_REPUBLICACAO")
 	@JsonProperty("CD_ARQUIVO")
 	private List<String> cdArquivo = new ArrayList<String>();
 	
@@ -53,10 +53,10 @@ public class Publicacao implements Serializable{
 	@JoinColumn(name="detalhelicitacao_id")
 	private DetalheLicitacao detalheLicitacao;
 	
-	public Publicacao() {
+	public Republicacao() {
 	}
 
-	public Publicacao(Integer id, String tipoEvento, String siglaLicitacon, String data, String hora, String evento,
+	public Republicacao(Integer id, String tipoEvento, String siglaLicitacon, String data, String hora, String evento,
 			List<String> cdArquivo, String detalheEvento, String cdTipoFase, DetalheLicitacao detalheLicitacao) {
 		super();
 		this.id = id;
@@ -167,7 +167,7 @@ public class Publicacao implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Publicacao other = (Publicacao) obj;
+		Republicacao other = (Republicacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

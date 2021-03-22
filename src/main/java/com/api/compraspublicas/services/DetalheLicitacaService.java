@@ -10,6 +10,7 @@ import com.api.compraspublicas.domain.Lote;
 import com.api.compraspublicas.domain.MensagemChat;
 import com.api.compraspublicas.domain.MensagemPregoeiro;
 import com.api.compraspublicas.domain.Publicacao;
+import com.api.compraspublicas.domain.Republicacao;
 import com.api.compraspublicas.domain.Suspensao;
 import com.api.compraspublicas.repositories.DetalheLicitacaoRepository;
 
@@ -40,6 +41,9 @@ public class DetalheLicitacaService {
 	@Autowired
 	private PublicacaoService publicacaoService;
 	
+	@Autowired
+	private RepublicacaoService republicacaoService;
+	
 	public DetalheLicitacao save(DetalheLicitacao obj) {
 		
 		DetalheLicitacao detalhe = repo.findByIdLicitacao(obj.getIdLicitacao());
@@ -69,6 +73,9 @@ public class DetalheLicitacaService {
 			for (Publicacao publ : obj.getPublicacoes()) {
 				publ.setDetalheLicitacao(obj);
 			}
+			for (Republicacao publ : obj.getRepublicacoes()) {
+				publ.setDetalheLicitacao(obj);
+			}
 			
 			repo.save(obj);
 			
@@ -79,6 +86,7 @@ public class DetalheLicitacaService {
 			suspensaoService.saveAll(obj.getSuspensoes());
 			cancelamentoService.saveAll(obj.getCancelamentos());
 			publicacaoService.saveAll(obj.getPublicacoes());
+			republicacaoService.saveAll(obj.getRepublicacoes());
 			
 			return obj;
 		}
