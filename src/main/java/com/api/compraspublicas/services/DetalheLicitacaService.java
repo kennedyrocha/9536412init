@@ -64,12 +64,12 @@ public class DetalheLicitacaService {
 	@Autowired
 	private DuvidaService duvidaService;
 	
-	public DetalheLicitacao save(DetalheLicitacao obj) {
+	public String save(DetalheLicitacao obj) {
 		
 		DetalheLicitacao detalhe = repo.findByIdLicitacao(obj.getIdLicitacao());
 		
 		if (detalhe != null) {
-			return detalhe;
+			return "Licitacao " + detalhe.getIdLicitacao() + " já consultada anteriormente, consulte a base de dados para obter as informações da mesma!";
 		}
 		else {
 			for (Lote lote : obj.getLotes()) {
@@ -128,7 +128,7 @@ public class DetalheLicitacaService {
 			notificacaoService.saveAll(obj.getNotificacoes());
 			duvidaService.saveAll(obj.getDuvidas());
 			
-			return obj;
+			return "Licitacação " + obj.getIdLicitacao() + " salva com sucesso!";
 		}
 	}
 }

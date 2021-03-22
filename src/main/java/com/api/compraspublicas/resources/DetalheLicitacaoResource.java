@@ -23,9 +23,15 @@ public class DetalheLicitacaoResource {
 	@RequestMapping(value="/{idLicitacao}", method=RequestMethod.GET)
 	public String consultar(@PathVariable Integer idLicitacao) {
 
-		DetalheLicitacao detalhe = rest.getDetalheLicitacao(idLicitacao);//117495
-		service.save(detalhe);
+		DetalheLicitacao detalhe;
 		
-		return "Consulta Realizada com sucesso!";
+		try {
+			detalhe = rest.getDetalheLicitacao(idLicitacao);//117495
+		}
+		catch (Exception e) {
+			return e.getMessage();
+		}
+		
+		return service.save(detalhe);
 	}
 }

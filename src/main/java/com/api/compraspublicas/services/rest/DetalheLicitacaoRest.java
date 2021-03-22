@@ -1,6 +1,7 @@
 package com.api.compraspublicas.services.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,15 @@ public class DetalheLicitacaoRest {
 	@Autowired
 	private ErroService erroService;
 	
+	@Value("${default.publicKey}")
+	private String publicKey;
+	
+	@Value("${default.fbclid}")
+	private String fbclid;
+	
+	@Value("${default.url.obterProcesso}")
+	private String urlObterProcesso;
+	
 	private final RestTemplate restTemplate;
 	
 	public DetalheLicitacaoRest(RestTemplateBuilder restTemplateBuilder) {
@@ -27,7 +37,7 @@ public class DetalheLicitacaoRest {
 	
 	public DetalheLicitacao getDetalheLicitacao(Integer idLicitacao) {
 		
-		String url = "http://apipcp.portaldecompraspublicas.com.br/publico/obterProcesso?publicKey=b85e2ec7688890d166d6547258c7d249&idLicitacao=" + idLicitacao + "&fbclid=IwAR3j-7bVbbmFSAQhijXO9t278gqpwu_YT2ADUHo2PnUHP7u6I3G_2gDVkJk";
+		String url = this.urlObterProcesso + "?publicKey=" + this.publicKey + "&idLicitacao=" + idLicitacao + "&fbclid=" + this.fbclid;
 
 		try {
 			ResponseEntity<DetalheLicitacao> response = this.restTemplate.getForEntity(url, DetalheLicitacao.class);
