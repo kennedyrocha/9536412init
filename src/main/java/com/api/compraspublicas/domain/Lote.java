@@ -23,6 +23,9 @@ public class Lote implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonProperty("NR_LOTE")
+	private Integer numeroLote;
+	
 	@JsonProperty("DS_LOTE")
 	private String descricaoLote;
 	
@@ -39,12 +42,13 @@ public class Lote implements Serializable {
 	public Lote() {
 	}
 
-	public Lote(Integer id, String descricaoLote, boolean cdBoleanoDDivisivel, DetalheLicitacao detalheLicitacao) {
+	public Lote(Integer id, String descricaoLote, boolean cdBoleanoDDivisivel, DetalheLicitacao detalheLicitacao, Integer numeroLote) {
 		super();
 		this.id = id;
 		this.descricaoLote = descricaoLote;
 		this.cdBoleanoDDivisivel = cdBoleanoDDivisivel;
 		this.detalheLicitacao = detalheLicitacao;
+		this.numeroLote = numeroLote;
 	}
 
 	public Integer getId() {
@@ -69,6 +73,14 @@ public class Lote implements Serializable {
 
 	public void setCdBoleanoDDivisivel(boolean cdBoleanoDDivisivel) {
 		this.cdBoleanoDDivisivel = cdBoleanoDDivisivel;
+	}
+
+	public Integer getNumeroLote() {
+		return numeroLote;
+	}
+
+	public void setNumeroLote(Integer numeroLote) {
+		this.numeroLote = numeroLote;
 	}
 
 	public DetalheLicitacao getDetalheLicitacao() {

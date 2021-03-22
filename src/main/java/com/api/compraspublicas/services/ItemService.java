@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.compraspublicas.domain.Item;
+import com.api.compraspublicas.domain.Lance;
 import com.api.compraspublicas.domain.Proposta;
 import com.api.compraspublicas.repositories.ItemRepository;
 
@@ -17,6 +18,9 @@ public class ItemService {
 	
 	@Autowired
 	private PropostaService propostaService;
+	
+	@Autowired
+	private LanceService lanceService;
 	
 	public Item save(Item obj) {
 		
@@ -31,11 +35,15 @@ public class ItemService {
 				
 				pro.setItem(it);
 			}
+			for (Lance la : it.getLances()) {
+				la.setItem(it);
+			}
 		}
 		repo.saveAll(itens);
 		
 		for (Item it : itens) {
 			propostaService.saveAll(it.getPropostas());
+			lanceService.saveAll(it.getLances());
 		}
 	}
 }

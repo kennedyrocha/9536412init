@@ -60,6 +60,10 @@ public class Item implements Serializable{
 	@OneToMany(mappedBy="item", cascade=CascadeType.ALL)
 	private List<Proposta> propostas = new ArrayList<>();
 	
+	@JsonProperty("Lances")
+	@OneToMany(mappedBy="item", cascade=CascadeType.ALL)
+	private List<Lance> lances = new ArrayList<>();
+	
 	public Item() {
 	}
 
@@ -174,6 +178,14 @@ public class Item implements Serializable{
 
 	public void setPropostas(List<Proposta> propostas) {
 		this.propostas = propostas;
+	}
+
+	public List<Lance> getLances() {
+		return lances;
+	}
+
+	public void setLances(List<Lance> lances) {
+		this.lances = lances;
 	}
 
 	@Override
