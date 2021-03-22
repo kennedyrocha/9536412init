@@ -1,5 +1,10 @@
 package com.api.compraspublicas.services.rest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,49 +12,52 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.api.compraspublicas.domain.Erro;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.api.compraspublicas.domain.Licitacao;
 
 @Service
 public class FornecedorRest {
 
 	private final RestTemplate restTemplate;
 	
+	@Value("${default.publicKey}")
+	private String publicKey;
+	
+	@Value("${default.fbclid}")
+	private String fbclid;
+	
+	@Value("${default.url.processosFornecedor}")
+	private String urlProcessosFornecedor;
+	
+	private String resposta;
+	
+	private ResponseEntity<Licitacao[]> response;
+	
 	public FornecedorRest(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 	
-	public Erro getErroWithResponseHandling() {
+	public List<Licitacao> getLicitacaoPorFornecedor(String idFornecedor, Integer tipoFornecedor, String mensagem) {
 		
-		String url = "http://apipcp.portaldecompraspublicas.com.br/publico/processosFornecedor/?publicKey=b85e2ec7688890d166d6547258c7d249&idFornecedor=30729998000120&tipoFornecedor=2";
+		String url = this.urlProcessosFornecedor + "/?publicKey=" + this.publicKey + "&idFornecedor=" + idFornecedor + "&tipoFornecedor=" + tipoFornecedor;
 
 		try {
-			ResponseEntity<Erro> response = this.restTemplate.getForEntity(url, Erro.class);
+			response = this.restTemplate.getForEntity(url, Licitacao[].class);
 			
 			if (response.getStatusCode() == HttpStatus.OK) {
-				return response.getBody();
+				return new ArrayList<Licitacao>(Arrays.asList(response.getBody()));
 			}
 			else {
 				return null;
 			}
 		}
-		catch(HttpClientErrorException e) {
-			
-			if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
-				
-				ObjectMapper mapper = new ObjectMapper();
-				
-				try {
-					Erro erro = mapper.readValue(e.getResponseBodyAsString(), Erro.class);
-					return erro;
-				}
-				catch (Exception ex) {
-					return null;
-				}
-			}
-			else {
-				return null;
-			}
+		catch(HttpClientErrorException e) {			
+			mensagem = e.getMessage();
+			this.resposta = mensagem + " \n url: " + url;
+			return null;
 		}
+	}
+	
+	public String getResposta() {
+		return this.resposta;
 	}
 }
