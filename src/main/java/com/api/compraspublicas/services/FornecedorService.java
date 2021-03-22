@@ -28,4 +28,8 @@ public class FornecedorService {
 	public Fornecedor findByIdExterno(String idExterno) {
 		return repo.findByIdExterno(idExterno);
 	}
+	
+	public Fornecedor update(Fornecedor obj) {
+		return repo.save(obj);
+	}
 }

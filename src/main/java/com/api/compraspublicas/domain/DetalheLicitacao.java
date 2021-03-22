@@ -72,6 +72,13 @@ public class DetalheLicitacao implements Serializable {
 	
 	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
 	private List<Lote> lotes = new ArrayList<>();
+	
+	@JsonProperty("MensagensPregoeiro")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<MensagemPregoeiro> mensagensPregoeiro = new ArrayList<>();
+
+	public DetalheLicitacao () {
+	}
 
 	public DetalheLicitacao(Integer id, Integer idLicitacao, String nR_PROCESSO, String nR_LICITACAO, String dS_OBJETO,
 			String aNO_LICITACAO, String dataInicioPropostas, String horaInicioPropostas, String dataFinalPropostas,
@@ -371,7 +378,12 @@ public class DetalheLicitacao implements Serializable {
 		this.lotes = lotes;
 	}
 
-	public DetalheLicitacao () {
+	public List<MensagemPregoeiro> getMensagensPregoeiro() {
+		return mensagensPregoeiro;
+	}
+
+	public void setMensagensPregoeiro(List<MensagemPregoeiro> mensagensPregoeiro) {
+		this.mensagensPregoeiro = mensagensPregoeiro;
 	}
 
 	@Override

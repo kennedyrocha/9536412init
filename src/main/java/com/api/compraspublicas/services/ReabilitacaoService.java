@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.compraspublicas.domain.Fornecedor;
-import com.api.compraspublicas.domain.Vencedor;
-import com.api.compraspublicas.repositories.VencedorRepository;
+import com.api.compraspublicas.domain.Reabilitacao;
+import com.api.compraspublicas.repositories.ReabilitacaoRepository;
 
 @Service
-public class VencedorService {
+public class ReabilitacaoService {
 
 	@Autowired
-	private VencedorRepository repo;
+	private ReabilitacaoRepository repo;
 	
 	@Autowired
 	private FornecedorService fornecedorService;
@@ -21,20 +21,13 @@ public class VencedorService {
 	@Autowired
 	private ItemService itemService;
 	
-	public Vencedor save(Vencedor obj) {
+	public Reabilitacao save(Reabilitacao obj) {
 		
 		if (fornecedorService.findByIdExterno(obj.getIdFornecedor()) == null
 				&& obj.getIdFornecedor() != null) {
-			obj.setFornecedor(fornecedorService.save(new Fornecedor(null, obj.getIdFornecedor(), obj.getRazaoSocial(), obj.getTipo())));
+			obj.setFornecedor(fornecedorService.save(new Fornecedor(null, obj.getIdFornecedor(), null, obj.getTipo())));
 		}
 		else {
-			Fornecedor forncec = fornecedorService.findByIdExterno(obj.getIdFornecedor());
-			
-			if (forncec != null && forncec.getNome() == null) {
-				forncec.setNome(obj.getRazaoSocial());
-				fornecedorService.update(forncec);
-			}
-			
 			obj.setFornecedor(fornecedorService.findByIdExterno(obj.getIdFornecedor()));
 		}
 		
@@ -45,10 +38,10 @@ public class VencedorService {
 		return repo.save(obj);
 	}
 	
-	public void saveAll(List<Vencedor> vencedores) {
+	public void saveAll(List<Reabilitacao> reabilitacoes) {
 		
-		for (Vencedor pro : vencedores) {
-			this.save(pro);
+		for (Reabilitacao rea : reabilitacoes) {
+			this.save(rea);
 		}
 	}
 }

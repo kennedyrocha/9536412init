@@ -47,6 +47,14 @@ public class Lote implements Serializable {
 	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL)
 	private List<Vencedor> vencedores = new ArrayList<>();
 	
+	@JsonProperty("Reversoes")
+	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL)
+	private List<Reversao> reversoes = new ArrayList<>();
+	
+	@JsonProperty("Reabilitacoes")
+	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL)
+	private List<Reabilitacao> reabilitacoes = new ArrayList<>();
+	
 	public Lote() {
 	}
 
@@ -121,6 +129,22 @@ public class Lote implements Serializable {
 
 	public void setVencedores(List<Vencedor> vencedores) {
 		this.vencedores = vencedores;
+	}
+
+	public List<Reversao> getReversoes() {
+		return reversoes;
+	}
+
+	public void setReversoes(List<Reversao> reversoes) {
+		this.reversoes = reversoes;
+	}
+
+	public List<Reabilitacao> getReabilitacoes() {
+		return reabilitacoes;
+	}
+
+	public void setReabilitacoes(List<Reabilitacao> reabilitacoes) {
+		this.reabilitacoes = reabilitacoes;
 	}
 
 	@Override

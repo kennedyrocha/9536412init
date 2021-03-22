@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.compraspublicas.domain.DetalheLicitacao;
 import com.api.compraspublicas.domain.Lote;
+import com.api.compraspublicas.domain.MensagemPregoeiro;
 import com.api.compraspublicas.repositories.DetalheLicitacaoRepository;
 
 @Service
@@ -15,6 +16,9 @@ public class DetalheLicitacaService {
 	
 	@Autowired
 	private LoteService loteService;
+	
+	@Autowired
+	private MensagemPregoeiroService mensagemPregoeiroService;
 	
 	public DetalheLicitacao save(DetalheLicitacao obj) {
 		
@@ -27,8 +31,12 @@ public class DetalheLicitacaService {
 			for (Lote lote : obj.getLotes()) {
 				lote.setDetalheLicitacao(obj);
 			}
+			for (MensagemPregoeiro men : obj.getMensagensPregoeiro()) {
+				men.setDetalheLicitacao(obj);
+			}
 			repo.save(obj);
 			loteService.saveAll(obj.getLotes());
+			mensagemPregoeiroService.saveAll(obj.getMensagensPregoeiro());
 			return obj;
 		}
 	}
