@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.compraspublicas.domain.Cancelamento;
 import com.api.compraspublicas.domain.DetalheLicitacao;
+import com.api.compraspublicas.domain.Duvida;
 import com.api.compraspublicas.domain.Encerramento;
 import com.api.compraspublicas.domain.Impugnacao;
 import com.api.compraspublicas.domain.Lote;
@@ -60,6 +61,9 @@ public class DetalheLicitacaService {
 	@Autowired
 	private NotificacaoService notificacaoService;
 	
+	@Autowired
+	private DuvidaService duvidaService;
+	
 	public DetalheLicitacao save(DetalheLicitacao obj) {
 		
 		DetalheLicitacao detalhe = repo.findByIdLicitacao(obj.getIdLicitacao());
@@ -104,6 +108,9 @@ public class DetalheLicitacaService {
 			for (Notificacao publ : obj.getNotificacoes()) {
 				publ.setDetalheLicitacao(obj);
 			}
+			for (Duvida publ : obj.getDuvidas()) {
+				publ.setDetalheLicitacao(obj);
+			}
 			
 			repo.save(obj);
 			
@@ -119,6 +126,7 @@ public class DetalheLicitacaService {
 			revogacaoService.saveAll(obj.getRevogacoes());
 			encerramentoService.saveAll(obj.getEncerramentos());
 			notificacaoService.saveAll(obj.getNotificacoes());
+			duvidaService.saveAll(obj.getDuvidas());
 			
 			return obj;
 		}

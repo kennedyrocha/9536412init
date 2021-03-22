@@ -116,6 +116,10 @@ public class DetalheLicitacao implements Serializable {
 	@JsonProperty("Notificacoes")
 	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
 	private List<Notificacao> notificacoes = new ArrayList<>();
+	
+	@JsonProperty("Duvidas")
+	@OneToMany(mappedBy="detalheLicitacao", cascade=CascadeType.ALL)
+	private List<Duvida> duvidas = new ArrayList<>();
 
 	public DetalheLicitacao () {
 	}
@@ -504,6 +508,14 @@ public class DetalheLicitacao implements Serializable {
 
 	public void setNotificacoes(List<Notificacao> notificacoes) {
 		this.notificacoes = notificacoes;
+	}
+
+	public List<Duvida> getDuvidas() {
+		return duvidas;
+	}
+
+	public void setDuvidas(List<Duvida> duvidas) {
+		this.duvidas = duvidas;
 	}
 
 	@Override
