@@ -22,7 +22,7 @@ public class DetalheLicitacaoResource {
 
 	@RequestMapping(value="/{idLicitacao}", method=RequestMethod.GET)
 	public String consultar(@PathVariable Integer idLicitacao) {
-		
+
 		DetalheLicitacao detalhe = rest.getDetalheLicitacao(idLicitacao);//117495
 		service.save(detalhe);
 		

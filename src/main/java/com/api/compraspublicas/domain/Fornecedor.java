@@ -1,10 +1,14 @@
 package com.api.compraspublicas.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Fornecedor implements Serializable {
@@ -14,16 +18,21 @@ public class Fornecedor implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String idExterno;
+	private String tipo;
 	private String nome;
+	
+	@OneToMany(mappedBy="fornecedor")
+	private List<Proposta> propostas = new ArrayList<>();
 	
 	public Fornecedor () {
 	}
 
-	public Fornecedor(Integer id, String idExterno, String nome) {
+	public Fornecedor(Integer id, String idExterno, String nome, String tipo) {
 		super();
 		this.id = id;
 		this.idExterno = idExterno;
 		this.nome = nome;
+		this.tipo = tipo;
 	}
 
 	public Integer getId() {
@@ -48,6 +57,22 @@ public class Fornecedor implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public List<Proposta> getPropostas() {
+		return propostas;
+	}
+
+	public void setPropostas(List<Proposta> propostas) {
+		this.propostas = propostas;
 	}
 
 	@Override

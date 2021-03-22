@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.compraspublicas.domain.DetalheLicitacao;
+import com.api.compraspublicas.domain.Item;
 import com.api.compraspublicas.domain.Lote;
 import com.api.compraspublicas.repositories.DetalheLicitacaoRepository;
 

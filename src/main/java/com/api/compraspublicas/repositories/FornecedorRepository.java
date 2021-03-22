@@ -8,4 +8,5 @@ import com.api.compraspublicas.domain.Fornecedor;
 @Repository
 public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer> {
 
+	Fornecedor findByIdExterno(String idExterno);
 }

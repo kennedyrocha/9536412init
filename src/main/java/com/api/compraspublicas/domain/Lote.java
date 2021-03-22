@@ -1,13 +1,17 @@
 package com.api.compraspublicas.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -19,26 +23,8 @@ public class Lote implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@JsonProperty("IdItem")
-	private Integer idItem;
-	
-	@JsonProperty("_id")
-	private String idExterno;
-	
-	@JsonProperty("NR_LOTE")
-	private Integer numeroLote;
-	
-	@JsonProperty("DS_ITEM")
-	private String descricaoItem;
-	
-	@JsonProperty("QT_ITENS")
-	private Integer quantidadeItem;
-	
-	@JsonProperty("NR_ITEM")
-	private Integer numeroItem;
-	
-	@JsonProperty("VL_UNITARIO_ESTIMADO")
-	private double valorUnitarioEstimado;
+	@JsonProperty("DS_LOTE")
+	private String descricaoLote;
 	
 	@JsonProperty("CD_BOLEANO_D_DIVISIVEL")
 	private boolean cdBoleanoDDivisivel;
@@ -47,21 +33,16 @@ public class Lote implements Serializable {
 	@JoinColumn(name="detalheLicitacao_id")
 	private DetalheLicitacao detalheLicitacao;
 	
+	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL)
+	private List<Item> itens = new ArrayList<>();
+	
 	public Lote() {
 	}
 
-	public Lote(Integer id, Integer idItem, String idExterno, Integer numeroLote, String descricaoItem,
-			Integer quantidadeItem, Integer numeroItem, double valorUnitarioEstimado, boolean cdBoleanoDDivisivel,
-			DetalheLicitacao detalheLicitacao) {
+	public Lote(Integer id, String descricaoLote, boolean cdBoleanoDDivisivel, DetalheLicitacao detalheLicitacao) {
 		super();
 		this.id = id;
-		this.idItem = idItem;
-		this.idExterno = idExterno;
-		this.numeroLote = numeroLote;
-		this.descricaoItem = descricaoItem;
-		this.quantidadeItem = quantidadeItem;
-		this.numeroItem = numeroItem;
-		this.valorUnitarioEstimado = valorUnitarioEstimado;
+		this.descricaoLote = descricaoLote;
 		this.cdBoleanoDDivisivel = cdBoleanoDDivisivel;
 		this.detalheLicitacao = detalheLicitacao;
 	}
@@ -74,60 +55,12 @@ public class Lote implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getIdItem() {
-		return idItem;
+	public String getDescricaoLote() {
+		return descricaoLote;
 	}
 
-	public void setIdItem(Integer idItem) {
-		this.idItem = idItem;
-	}
-
-	public String getIdExterno() {
-		return idExterno;
-	}
-
-	public void setIdExterno(String idExterno) {
-		this.idExterno = idExterno;
-	}
-
-	public Integer getNumeroLote() {
-		return numeroLote;
-	}
-
-	public void setNumeroLote(Integer numeroLote) {
-		this.numeroLote = numeroLote;
-	}
-
-	public String getDescricaoItem() {
-		return descricaoItem;
-	}
-
-	public void setDescricaoItem(String descricaoItem) {
-		this.descricaoItem = descricaoItem;
-	}
-
-	public Integer getQuantidadeItem() {
-		return quantidadeItem;
-	}
-
-	public void setQuantidadeItem(Integer quantidadeItem) {
-		this.quantidadeItem = quantidadeItem;
-	}
-
-	public Integer getNumeroItem() {
-		return numeroItem;
-	}
-
-	public void setNumeroItem(Integer numeroItem) {
-		this.numeroItem = numeroItem;
-	}
-
-	public double getValorUnitarioEstimado() {
-		return valorUnitarioEstimado;
-	}
-
-	public void setValorUnitarioEstimado(double valorUnitarioEstimado) {
-		this.valorUnitarioEstimado = valorUnitarioEstimado;
+	public void setDescricaoLote(String descricaoLote) {
+		this.descricaoLote = descricaoLote;
 	}
 
 	public boolean isCdBoleanoDDivisivel() {
@@ -144,6 +77,14 @@ public class Lote implements Serializable {
 
 	public void setDetalheLicitacao(DetalheLicitacao detalheLicitacao) {
 		this.detalheLicitacao = detalheLicitacao;
+	}
+
+	public List<Item> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<Item> itens) {
+		this.itens = itens;
 	}
 
 	@Override

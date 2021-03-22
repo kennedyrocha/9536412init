@@ -24,4 +24,8 @@ public class FornecedorService {
 		obj.setId(null);
 		return repo.save(obj);
 	}
+	
+	public Fornecedor findByIdExterno(String idExterno) {
+		return repo.findByIdExterno(idExterno);
+	}
 }
