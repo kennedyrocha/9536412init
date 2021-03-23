@@ -2,11 +2,18 @@ package com.api.compraspublicas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class ApiComprasPublicasApplication /*implements CommandLineRunner*/ {
+public class ApiComprasPublicasApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiComprasPublicasApplication.class, args);
 	}
+
+	  @Override
+	  protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+	      return builder.sources(ApiComprasPublicasApplication.class);
+	  }
 }

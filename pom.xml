@@ -10,12 +10,14 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.api</groupId>
+	<packaging>war</packaging>
 	<artifactId>ApiComprasPublicas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ApiComprasPublicas</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<start-class>com.api.compraspublicas.ApiComprasPublicasApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,10 +43,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-jdbc</artifactId>
-    </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
