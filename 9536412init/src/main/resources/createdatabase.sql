@@ -1134,4 +1134,56 @@ ALTER TABLE `vencedor`
   ADD CONSTRAINT `FK8rto18klmke0bxo662rymq1l4` FOREIGN KEY (`fornecedor_id`) REFERENCES `fornecedor` (`id`),
   ADD CONSTRAINT `FK94r4npwg2xu45l43l860sjt27` FOREIGN KEY (`lote_id`) REFERENCES `lote` (`id`),
   ADD CONSTRAINT `FKjr06dr742o7cmjex0gp8heljr` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`);
+
+
+CREATE TABLE `unidade_compradora` (
+  `id` int(11) NOT NULL,
+  `cd_municipio_ibge` varchar(255) DEFAULT NULL,
+  `cidade` varchar(255) DEFAULT NULL,
+  `data` varchar(255) DEFAULT NULL,
+  `id_comprador` int(11) DEFAULT NULL,
+  `id_unidade_compradora` int(11) DEFAULT NULL,
+  `nome_comprador` varchar(255) DEFAULT NULL,
+  `nome_unidade_compradora` varchar(255) DEFAULT NULL,
+  `uf` varchar(255) DEFAULT NULL,
+  `detalhe_licitacao_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `unidade_compradora`
+--
+ALTER TABLE `unidade_compradora`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK9hcm4ggwfvv2qb6s0093nlg76` (`detalhe_licitacao_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `unidade_compradora`
+--
+ALTER TABLE `unidade_compradora`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `unidade_compradora`
+--
+ALTER TABLE `unidade_compradora`
+  ADD CONSTRAINT `FK9hcm4ggwfvv2qb6s0093nlg76` FOREIGN KEY (`detalhe_licitacao_id`) REFERENCES `detalhe_licitacao` (`id`);
+
+
+ALTER TABLE `mensagem_chat`
+	ADD COLUMN `apelido` varchar(255) DEFAULT NULL;
+
+
+
 COMMIT;
