@@ -24,6 +24,9 @@ public class MensagemChat implements Serializable {
 	@JoinColumn(name="detalheLicitacao_id")
 	private DetalheLicitacao detalheLicitacao;
 	
+	@JsonProperty("Apelido")
+	private String apelido;
+	
 	@JsonProperty("Data")
 	private String data;
 	
@@ -37,13 +40,14 @@ public class MensagemChat implements Serializable {
 	public MensagemChat() {
 	}
 
-	public MensagemChat(Integer id, DetalheLicitacao detalheLicitacao, String data, String hora, String frase) {
+	public MensagemChat(Integer id, DetalheLicitacao detalheLicitacao, String data, String hora, String frase, String apelido) {
 		super();
 		this.id = id;
 		this.detalheLicitacao = detalheLicitacao;
 		this.data = data;
 		this.hora = hora;
 		this.frase = frase;
+		this.apelido = apelido;
 	}
 
 	public Integer getId() {
@@ -84,6 +88,14 @@ public class MensagemChat implements Serializable {
 
 	public void setFrase(String frase) {
 		this.frase = frase;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 
 	@Override
